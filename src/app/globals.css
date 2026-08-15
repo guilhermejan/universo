@@ -1,0 +1,157 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Marca UNIVERSO */
+  --color-universo-black: var(--universo-black);
+  --color-universo-red: var(--universo-red);
+  --color-universo-red-hover: var(--universo-red-hover);
+  --color-universo-blue-from: var(--universo-blue-from);
+  --color-universo-blue-to: var(--universo-blue-to);
+  --color-universo-offwhite: var(--universo-offwhite);
+
+  /* Semáforo de conformidade (usado em Documentos/Empresas) */
+  --color-status-valido: var(--status-valido);
+  --color-status-a-conferir: var(--status-a-conferir);
+  --color-status-a-vencer: var(--status-a-vencer);
+  --color-status-vencido: var(--status-vencido);
+
+  --font-display: var(--font-sora);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains-mono);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  /* O design system ainda não tem tema escuro — sem isso, navegadores com
+     dark mode no SO auto-invertem os controles nativos (input, select,
+     scrollbar) só no nível de pintura (não aparece no getComputedStyle),
+     deixando o texto escuro digitado ilegível sobre o fundo escurecido. */
+  color-scheme: light;
+
+  --radius: 0.625rem;
+
+  --background: #ffffff;
+  --foreground: var(--universo-black);
+
+  --card: #ffffff;
+  --card-foreground: var(--universo-black);
+
+  --popover: #ffffff;
+  --popover-foreground: var(--universo-black);
+
+  --primary: var(--universo-red);
+  --primary-foreground: #ffffff;
+  --secondary: #f2f2f1;
+  --secondary-foreground: var(--universo-black);
+  --muted: #f7f7f6;
+  --muted-foreground: #6b6b68;
+  --accent: #f2f2f1;
+  --accent-foreground: var(--universo-black);
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+
+  --border: #e6e5e3;
+  --input: #e6e5e3;
+  --ring: var(--universo-blue-to);
+
+  --universo-black: #1a1a1a;
+  --universo-red: #e31e24;
+  --universo-red-hover: #c81920;
+  --universo-blue-from: #4fc8f0;
+  --universo-blue-to: #1d7fc4;
+  --universo-offwhite: #f7f7f6;
+
+  --status-valido: #16a34a;
+  --status-a-conferir: #1d7fc4;
+  --status-a-vencer: #d97706;
+  --status-vencido: #e31e24;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+}
+
+/* Assinatura visual: estrela animada (ver components/branding/Starburst.tsx)
+   e pequenas entradas suaves usadas no login/dashboard. */
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse-soft {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.04);
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 14s linear infinite;
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 5s ease-in-out infinite;
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.5s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-spin-slow,
+  .animate-pulse-soft,
+  .animate-fade-in-up {
+    animation: none;
+  }
+}
