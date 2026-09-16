@@ -27,7 +27,7 @@ async function main() {
     .maybeSingle();
 
   if (usuarioExistente) {
-    console.log(`Já existe um usuário com o e-mail ${email}. Nada a fazer.`);
+    console.log("Usuário administrativo já cadastrado. Nada a fazer.");
     return;
   }
 
@@ -43,8 +43,8 @@ async function main() {
       .insert({
         tipo: "proprietaria_saas",
         empresa_pai_id: null,
-        razao_social: "UNIVERSO SOLUÇÃO EM SERVIÇOS",
-        nome_fantasia: "UNIVERSO",
+        razao_social: requireEnv("SEED_EMPRESA_RAZAO_SOCIAL"),
+        nome_fantasia: requireEnv("SEED_EMPRESA_NOME_FANTASIA"),
         cnpj,
       })
       .select("id")
@@ -52,9 +52,9 @@ async function main() {
 
     if (erroEmpresa) throw erroEmpresa;
     universo = novaEmpresa;
-    console.log(`Empresa UNIVERSO criada (id ${universo.id}).`);
+    console.log("Empresa proprietária criada.");
   } else {
-    console.log(`Empresa UNIVERSO já existia (id ${universo.id}).`);
+    console.log("Empresa proprietária já cadastrada.");
   }
 
   let authUserId: string;
@@ -70,10 +70,10 @@ async function main() {
     const existente = listagem.users.find((u) => u.email === email);
     if (!existente) throw erroCriacao;
     authUserId = existente.id;
-    console.log(`Usuário de autenticação já existia (${email}).`);
+    console.log("Usuário de autenticação já cadastrado.");
   } else {
     authUserId = criado.user.id;
-    console.log(`Usuário de autenticação criado (${email}).`);
+    console.log("Usuário de autenticação criado.");
   }
 
   const { error: erroPerfil } = await admin.from("usuarios").insert({
@@ -88,7 +88,6 @@ async function main() {
   if (erroPerfil) throw erroPerfil;
 
   console.log("\nPronto! Login inicial:");
-  console.log(`  e-mail: ${email}`);
   console.log(`  senha:  (a que você definiu em SEED_ADMIN_PASSWORD)`);
 }
 
@@ -101,6 +100,6 @@ function requireEnv(name: string): string {
 }
 
 main().catch((err) => {
-  console.error("Falha ao rodar o seed:", err);
+  console.error("Falha ao rodar o seed. Confira as variáveis privadas e o estado do banco.");
   process.exit(1);
 });

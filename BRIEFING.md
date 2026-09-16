@@ -1,10 +1,7 @@
 # Briefing — SaaS de Gestão de Terceiros (UNIVERSO)
 
 ## Contexto
-A NakaCompany (minha agência) foi contratada por uma empresa para desenvolver um sistema
-com as mesmas funções de um SaaS de referência (RainbowTec — gestão de terceiros e
-controle de acesso). A empresa **UNIVERSO** é a dona da plataforma: ela vai gerenciar
-outras empresas dentro do painel.
+Aplicação de gestão de terceiros, com organização de empresas, contratos e documentação. Os requisitos abaixo descrevem o produto sem identificar relações comerciais ou fornecedores de referência.
 
 ## Hierarquia do sistema (3 níveis)
 1. **UNIVERSO** — empresa proprietária da plataforma (nível raiz/admin geral)
@@ -13,7 +10,7 @@ outras empresas dentro do painel.
 3. **Empresas terceirizadas/prestadoras** — as empresas de fato fiscalizadas, vinculadas
    a uma contratante, com funcionários e documentos
 
-## Módulos funcionais (baseados no sistema de referência)
+## Módulos funcionais
 - **Dashboard** — visão consolidada de conformidade por empresa contratante, com uma
   timeline mensal colorida por status (válido / entregue a conferir / a vencer / vencido)
 - **Cadastro de Empresas** — dados cadastrais (razão social, CNPJ, endereço, responsável),
@@ -36,7 +33,7 @@ Schema completo em `db/schema.sql` (incluso neste projeto). Principais tabelas:
 `auditorias_campo`, `registros_acesso`.
 
 ## Identidade visual
-Logo real da UNIVERSO em `assets/logo-universo.png` (preto, vermelho e azul, com
+Logo do projeto em `assets/logo-universo.png` (preto, vermelho e azul, com
 estrela e swoosh). Paleta extraída dela:
 - Preto estrutural: `#1A1A1A` — texto, sidebar, navegação
 - Vermelho de ação: `#E31E24` — botões primários, alertas, item ativo no menu
@@ -48,8 +45,7 @@ Tipografia: display `Sora` (títulos, KPIs), texto `Inter` (interface), mono
 
 Direção: plataforma **interativa e moderna** — microinterações discretas (hover states,
 transições suaves), cor usada só pra comunicar significado (status de conformidade),
-não decoração. Existe um mockup de referência (login + dashboard) já validado comigo,
-que pode servir de ponto de partida visual.
+não decoração. 
 
 ## Prioridade de construção (MVP primeiro)
 1. Setup do projeto + banco de dados (rodar `db/schema.sql`)

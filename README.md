@@ -46,3 +46,11 @@ O comando `npm run seed` altera dados: revise `scripts/seed.ts` e o banco de des
 ## Estado e privacidade
 
 Repositório privado e projeto em continuidade. Mantenha credenciais e dados reais fora do código e das demonstrações públicas. Esta atualização é documental: não altera a aplicação nem comprova sua segurança ou funcionamento ponta a ponta.
+
+## Configuração privada
+
+Copie `.env.example` para `.env.local` e preencha somente no seu ambiente. A chave `SUPABASE_SERVICE_ROLE_KEY` é exclusiva do servidor e não pode receber prefixo `NEXT_PUBLIC_`.
+
+O seed também exige `SEED_EMPRESA_RAZAO_SOCIAL` e `SEED_EMPRESA_NOME_FANTASIA` para criar a empresa proprietária. Dados de administrador e CNPJ continuam em variáveis privadas. Os logs do seed não mostram e-mail nem identificadores internos.
+
+O briefing foi generalizado para retirar referências a relações comerciais. Não foram encontradas credenciais literais nos arquivos textuais examinados da main e de seu histórico. Campos de CPF/CNPJ no schema são definições, não registros de clientes; foram preservados. A aplicação continua privada e esta revisão não é uma auditoria completa de autorização ou de arquivos binários.
